@@ -12,25 +12,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// 1. REGISTRAR DBCONTEXT
 builder.Services.AddDbContext<CineDbContext>(
     options => options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")
     )
 );
 
-//Regsitro de repositorios
 builder.Services.AddScoped<IPeliculaRepository, PeliculaRepository>();
 builder.Services.AddScoped<IPeliculaSalaCineRepository, PeliculaSalaCineRepository>();
 builder.Services.AddScoped<ISalaCineRepository, SalaCineRepository>();
 
-
-//Registor de servicios
 builder.Services.AddScoped<IPeliculaService, PeliculaService>();
 builder.Services.AddScoped<ISalaCineService, SalaCineService>();
 builder.Services.AddScoped<IPeliculaSalaCineService, PeliculaSalaCineService>();
 
-//Add CORS 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
